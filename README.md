@@ -9,6 +9,5 @@ Node.js express middleware for capturing HTTP requests and responses
 [![Dev Dependencies](https://david-dm.org/alexjoverm/typescript-library-starter/dev-status.svg)](https://david-dm.org/alexjoverm/typescript-library-starter?type=dev)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/AJoverMorales)
 
-![](https://i.imgur.com/opUmHp0.png)
 
 ### Usage
