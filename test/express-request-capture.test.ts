@@ -1,4 +1,7 @@
-import { ExpressCapture, expressCapture } from '../src/express-request-capture'
+import {
+  ExpressCaptureClass,
+  expressCapture
+} from '../src/express-request-capture'
 
 /**
  * Dummy test
@@ -9,13 +12,15 @@ describe('Dummy test', () => {
   })
 
   it('DummyClass is instantiable', () => {
-    expect(new ExpressCapture()).toBeInstanceOf(ExpressCapture)
+    expect(new ExpressCaptureClass()).toBeInstanceOf(ExpressCaptureClass)
   })
   it('calls setChannel method', () => {
     let name = 'console'
     let url = undefined
     let channel = { name, url }
-    expect(expressCapture.setChannel(channel)).toBeInstanceOf(ExpressCapture)
+    expect(expressCapture.setChannel(channel)).toBeInstanceOf(
+      ExpressCaptureClass
+    )
   })
   it('calls capture method', () => {
     expect(expressCapture.capture(null, null, null)).toBeDefined()

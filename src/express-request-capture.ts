@@ -18,7 +18,7 @@ export interface Channel {
   url: string | undefined
 }
 
-export class ExpressCapture {
+export class ExpressCaptureClass {
   /**
    * @private
    * where you want want to print your data
@@ -29,9 +29,9 @@ export class ExpressCapture {
   /**
    * 
    * @param {Channel} channel 
-   * @return {ExpressCapture} for chaining purposes
+   * @return {ExpressCaptureClass} for chaining purposes
    */
-  public setChannel(channel: Channel): ExpressCapture {
+  public setChannel(channel: Channel): ExpressCaptureClass {
     this.channel = channel
     return this
   }
@@ -52,5 +52,5 @@ export class ExpressCapture {
   }
 }
 
-export const expressCapture = new ExpressCapture()
+export const expressCapture = new ExpressCaptureClass()
 export const capture = expressCapture.capture
