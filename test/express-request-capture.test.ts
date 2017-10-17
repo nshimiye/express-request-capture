@@ -1,4 +1,4 @@
-import DummyClass from '../src/express-request-capture'
+import { ExpressCapture, hello, capture } from '../src/express-request-capture'
 
 /**
  * Dummy test
@@ -9,11 +9,14 @@ describe('Dummy test', () => {
   })
 
   it('DummyClass is instantiable', () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
+    expect(new ExpressCapture()).toBeInstanceOf(ExpressCapture)
   })
-  it('calls hello method', () => {
+  it('calls me method', () => {
     let name = 'mars'
     let expected = `Hello ${name}`
-    expect(new DummyClass().hello(name)).toEqual(expected)
+    expect(hello(name)).toEqual(expected)
+  })
+  it('calls capture method', () => {
+    expect(capture(null, null, null)).toBeDefined()
   })
 })

@@ -11,3 +11,6 @@ Node.js express middleware for capturing HTTP requests and responses
 
 
 ### Usage
+
+## Packaging
+* use of `jsnext:main`:  https://github.com/jsforum/jsforum/issues/5
