@@ -13,11 +13,35 @@ export interface RequestLog {
   }
 }
 
+export interface Channel {
+  name: string
+  url: string | undefined
+}
+
 export class ExpressCapture {
-  public hello(name: string): string {
-    return `Hello ${name}`
+  /**
+   * @private
+   * where you want want to print your data
+   * url is either the http url or absolute path(if channel is a local file)
+   */
+  private channel: Channel
+
+  /**
+   * 
+   * @param {Channel} channel 
+   * @return {ExpressCapture} for chaining purposes
+   */
+  public setChannel(channel: Channel): ExpressCapture {
+    this.channel = channel
+    return this
   }
 
+  /**
+   * @TODO it can be called alone, in this case it will assume that the channel is console
+   * @param req 
+   * @param res 
+   * @param next 
+   */
   public capture(req: any, res: any, next: () => any): RequestLog {
     let url = ''
     let payload = ''
@@ -28,6 +52,5 @@ export class ExpressCapture {
   }
 }
 
-let expressCapture = new ExpressCapture()
-export const hello = expressCapture.hello
+export const expressCapture = new ExpressCapture()
 export const capture = expressCapture.capture
