@@ -6,5 +6,5 @@
         }
       }]
     ],
-    "plugins": ["transform-object-assign", "external-helpers", "transform-runtime"]
+    "plugins": ["transform-object-assign", "external-helpers"]
   }

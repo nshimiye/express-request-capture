@@ -20,6 +20,15 @@ export interface ChannelInterface {
   url?: string | undefined
 }
 
+export interface statusCodeInterface {
+  OK200: string
+  OK300: string
+  ERROR400: string
+  ERROR500: string
+  OTHER: string
+  [key: string]: string
+}
+
 export interface ChannelsInterface {
   DEFAULT: ChannelInterface
   CONSOLE: ChannelInterface
@@ -66,15 +75,16 @@ export const channels: ChannelsInterface = {
   CONSOLE: { name: 'console' }
 }
 
-export const statusCodeMap = {
+export const statusCodeMap: statusCodeInterface = {
   OK200: '200',
   OK300: '300',
   ERROR400: '400',
   ERROR500: '500',
   OTHER: 'OTHER'
 }
+let statusCodeList  = Object.keys(statusCodeMap).map(key => statusCodeMap[key])
 
-export function lookupByName(
+export function lookupByChannel(
   channel: ChannelInterface = channels.DEFAULT
 ): {
   log: (
@@ -101,12 +111,12 @@ export function lookupByName(
  */
 export function capture(
   channel: ChannelInterface = channels.DEFAULT,
-  status: string | Array<string> = Object.values(statusCodeMap)
+  status: string | Array<string> = statusCodeList
 ) {
   return function(req: any, res: any, next: () => any): () => any {
     let rq = { headers: {} }
     let rs = { headers: {}, payload: null }
-    lookupByName(channel).log(req.baseUrl, rq, rs)
+    lookupByChannel(channel).log(req.baseUrl, rq, rs)
     return next()
   }
 }
