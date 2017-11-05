@@ -1,16 +1,13 @@
 import {
   ExpressCaptureClass,
-  expressCapture
+  expressCapture,
+  capture
 } from '../src/express-request-capture'
 
 /**
  * Dummy test
  */
 describe('Dummy test', () => {
-  it('works if true is truthy', () => {
-    expect(true).toBeTruthy()
-  })
-
   it('DummyClass is instantiable', () => {
     expect(new ExpressCaptureClass()).toBeInstanceOf(ExpressCaptureClass)
   })
@@ -24,5 +21,17 @@ describe('Dummy test', () => {
   })
   it('calls capture method', () => {
     expect(expressCapture.capture(null, null, null)).toBeDefined()
+  })
+})
+describe('Middleware', () => {
+  it('creates a middleware function', () => {
+    expect(capture()).toBeInstanceOf(Function)
+  })
+  it('calls next after logging the request', () => {
+    expect(
+      capture()(null, null, () => {
+        return (req, res, next) => {}
+      })
+    ).toBeInstanceOf(Function)
   })
 })

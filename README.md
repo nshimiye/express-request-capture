@@ -14,3 +14,6 @@ Node.js express middleware for capturing HTTP requests and responses
 
 ## Packaging
 * use of `jsnext:main`:  https://github.com/jsforum/jsforum/issues/5
+
+### Resource
+* [Using Superset for acceptence testing](http://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/)
