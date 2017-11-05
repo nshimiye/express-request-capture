@@ -30,7 +30,9 @@ describe('Middleware', () => {
   it('calls next after logging the request', () => {
     expect(
       capture()(null, null, () => {
-        return (req, res, next) => {}
+        return (req, res, next) => {
+          return true
+        }
       })
     ).toBeInstanceOf(Function)
   })

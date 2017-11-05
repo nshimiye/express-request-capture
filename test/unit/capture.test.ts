@@ -40,7 +40,7 @@ app.delete('/log/:id', (req, res) => {
   })
 
   it('DummyClass is instantiable', () => {
-    var request = httpMocks.createRequest({
+    const request = httpMocks.createRequest({
       method: 'GET',
       url: '/logs'
     })
@@ -52,7 +52,7 @@ app.delete('/log/:id', (req, res) => {
     expect(nextSpy.calledOnce).toEqual(true)
 
     // var data = JSON.parse(response._getData())
-    var data = response._getData()
+    const data = response._getData()
     console.log(data)
     // test.equal("Bob Dog", data.name);
     // test.equal(42, data.age);
