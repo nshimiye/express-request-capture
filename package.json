@@ -75,7 +75,21 @@
       }
     },
     "collectCoverage": true,
-    "mapCoverage": true
+    "mapCoverage": true,
+    "globals": {
+      "ts-jest": {
+        "babelConfig": {
+          "presets": [
+            ["latest", {
+              "es2015": {
+                "modules": false
+              }
+            }]
+          ],
+          "plugins": ["transform-object-assign", "external-helpers", "transform-runtime"]
+        }
+      }
+    }
   },
   "devDependencies": {
     "@types/jest": "^21.1.0",
