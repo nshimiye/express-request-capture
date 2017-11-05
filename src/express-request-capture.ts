@@ -20,7 +20,7 @@ export interface ChannelInterface {
   url?: string | undefined
 }
 
-export interface statusCodeInterface {
+export interface StatusCodeInterface {
   OK200: string
   OK300: string
   ERROR400: string
@@ -75,7 +75,7 @@ export const channels: ChannelsInterface = {
   CONSOLE: { name: 'console' }
 }
 
-export const statusCodeMap: statusCodeInterface = {
+export const statusCodeMap: StatusCodeInterface = {
   OK200: '200',
   OK300: '300',
   ERROR400: '400',
