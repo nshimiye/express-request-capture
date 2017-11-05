@@ -64,10 +64,9 @@ describe('Test capture function', () => {
   })
 
   it('logs get request', () => {
-    return requestTest(app)
-      ['get']('/logs')
-      .then(response => {
-        expect(response.statusCode).toBe(200)
-      })
+    const getRquest = requestTest(app)['get']
+    return getRquest('/logs').then(response => {
+      expect(response.statusCode).toBe(200)
+    })
   })
 })
