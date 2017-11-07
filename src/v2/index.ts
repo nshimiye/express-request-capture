@@ -7,7 +7,7 @@
  */
 import { Express, Request, Response } from 'express'
 
-import { capture } from './capture' // captureRequestData
+import { capture, ERCIRequest, ERCIResponse } from './capture' // captureRequestData
 import printer from './printer'
 // var printAdapter = { channel: 'console|http|mongo|mysql', url: 'required if channel is either http or database' }
 export interface IPrintAdapter {
@@ -15,12 +15,14 @@ export interface IPrintAdapter {
   url?: string // not needed for console channel
 }
 export function captureManager(printAdapter: IPrintAdapter) {
-  return function(req: Request, res: Response, next: () => any) {
+  return function(req: ERCIRequest, res: ERCIResponse, next: () => any) {
     return (
       capture(req, res, next) // capture calls next!
-        .then(data => printer.print(data, printAdapter.channel, printAdapter))
+        .then((data: any) =>
+          printer.print(data, printAdapter.channel, printAdapter)
+        )
         // .then(data => { console.log('success', data); return printer.print(data, printAdapter.channel, printAdapter)})
-        .catch(e =>
+        .catch((e: Error) =>
           console.error(`[${new Date()}]-[express-request-capture]`, e)
         )
     )
