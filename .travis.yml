@@ -10,8 +10,11 @@ notifications:
   email: false
 node_js:
   - '8'
+install:
+  - npm install -g codecov
 script:
   - npm run test:prod && npm run build
+  - codecov --token=b61142de-9f3c-4c0f-8567-8deaa7d1f6f9
 after_success:
   - npm run report-coverage
   - npm run deploy-docs

@@ -53,8 +53,9 @@ describe('Test capture function', () => {
     server = app.listen(3000, () => done())
   })
 
-  afterAll(() => {
+  afterAll(done => {
     server.close()
+    done()
   })
 
   it('logs get request', () => {

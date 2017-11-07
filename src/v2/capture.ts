@@ -26,8 +26,14 @@ export interface RequestLog {
   }
   latency: number
 }
-export interface ERCIRequest extends Response {
+export interface ERCIRequest extends Request {
   _headers: any
+}
+export interface ERCIResponse extends Response {
+  _headers: any
+  write: any
+  end: any
+  once: any
 }
 
 /**
@@ -39,24 +45,31 @@ export interface ERCIRequest extends Response {
  * @returns Promise< string | { [key: number|string]: any }> the parsed body
  */
 export function parseRequestBody(
-  contentType: string,
-  req: Request,
-  res: Response,
-  options
-) {
+  contentType: string | undefined,
+  req: ERCIRequest,
+  res: ERCIResponse,
+  options: any
+): Promise<string | { [key: string]: any }> {
   let bodyParser
   switch (contentType) {
     case ContentTypes.TEXT_PLAIN:
-      bodyParser = new Promise(r => textBody(req, (err, body) => r(body)))
+      bodyParser = new Promise(r =>
+        textBody(req, (err: Error, body: any) => r(err || body))
+      )
       break
     case ContentTypes.APPLICATION_FORM:
-      bodyParser = new Promise(r => formBody(req, {}, (err, body) => r(body)))
+      bodyParser = new Promise(r =>
+        formBody(req, {}, (err: Error, body: any) => r(err || body))
+      )
       break
     case ContentTypes.APPLICATION_JSON:
-      bodyParser = new Promise(r => jsonBody(req, res, (err, body) => r(body)))
+      bodyParser = new Promise(r =>
+        jsonBody(req, res, (err: Error, body: any) => r(err || body))
+      )
+      break
     default:
       bodyParser = new Promise(r =>
-        anyBody(req, res, {}, (err, body) => r(body))
+        anyBody(req, res, {}, (err: Error, body: any) => r(err || body))
       )
       break
   }
@@ -71,10 +84,10 @@ export function parseRequestBody(
  * @return Promise<string | { [key: number|string]: any }> the parsed body
  */
 export function parseResponseBody(
-  res: Response | { write: any; end: any; once: any },
-  options,
+  res: ERCIResponse,
+  options: any,
   next: () => any
-) {
+): Promise<string | { [key: string]: any }> {
   return new Promise((resolve, reject) => {
     let write = res.write
     let end = res.end
@@ -133,7 +146,7 @@ export function parseRequestMeta(req: Request) {
   const method = req.method
   // console.log('method', method);
 
-  const headers = req.headers
+  const headers = req.headers as { [key: string]: any }
   // console.log('request headers', headers);
 
   const host = req.get('host')
@@ -149,7 +162,7 @@ export function parseRequestMeta(req: Request) {
  * @param res {Express.Response}
  * @returns { status: string, headers: { [key: string]: string|number } }
  */
-export function parseResponseMeta(res: ERCIRequest) {
+export function parseResponseMeta(res: ERCIResponse) {
   const headers = res._headers
   // console.log('response headers', headers);
 
@@ -166,19 +179,23 @@ export function parseResponseMeta(res: ERCIRequest) {
  * @param {*} next 
  * @return Promise<Re>
  */
-export function capture(req: Request, res, next): Promise<RequestLog> {
+export function capture(
+  req: ERCIRequest,
+  res: ERCIResponse,
+  next: () => any
+): Promise<RequestLog | any> {
   const start = Date.now()
   const contentType = req.get('content-type')
   let options = {}
   let data = { url: '', request: {}, respone: {}, latency: 0 } // output
   return parseRequestBody(contentType, req, res, options)
-    .then(payload => {
+    .then((payload: any) => {
       // => request body
       data.request = Object.assign({}, data.request, { payload })
       let options = {}
       return parseResponseBody(res, options, next)
     })
-    .catch(e => {
+    .catch((e: any) => {
       console.log('F - calling next', e) // @TODO why do i have to call next in here?
       next()
       // in here we should stop the execution

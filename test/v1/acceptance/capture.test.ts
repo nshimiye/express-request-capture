@@ -12,7 +12,7 @@ describe('Test capture function', () => {
   let response
   let app
   let server
-  beforeEach(done => {
+  beforeAll(done => {
     routeGetHandler = (req, res) =>
       res
         .status(200)
@@ -55,8 +55,9 @@ describe('Test capture function', () => {
     server = app.listen(3000, () => done())
   })
 
-  afterAll(() => {
+  afterAll(done => {
     server.close()
+    done()
   })
 
   it('logs get request', () => {
