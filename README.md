@@ -12,7 +12,7 @@ Node.js express middleware for capturing HTTP requests and responses
 ### API
 
 ```js
-var requestCapture = require ('@clearonline/express-request-capture')
+var requestCapture = require ('express-request-capture')
 ```
 
 * requestCapture ({ channel: string, url?: string })
@@ -25,7 +25,7 @@ var requestCapture = require ('express-request-capture'),
 
 var app = express()
 
-var printAdapter = { channel: 'console|http|mongo|mysql', url: 'required if channel is either http or database' };
+var printAdapter = { channel: 'console|http', url: 'required if channel is either http' };
 app.use(requestCapture(printAdapter))
 ```
 
