@@ -1,7 +1,7 @@
 import * as httpMocks from 'node-mocks-http'
 import * as sinon from 'sinon'
 
-import { capture } from '../../src/express-request-capture'
+import { capture } from '../../../src/v2'
 
 describe('Test capture function', () => {
   let routeGetHandler

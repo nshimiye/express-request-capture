@@ -1,11 +1,7 @@
 import Express from 'express'
 import requestTest from 'supertest'
 
-import {
-  capture,
-  channels,
-  statusCodeMap
-} from '../../src/express-request-capture'
+import { capture, channels, statusCodeMap } from '../../../src/v1'
 
 describe('Test capture function', () => {
   let routeGetHandler

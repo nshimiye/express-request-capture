@@ -82,7 +82,7 @@ export const statusCodeMap: StatusCodeInterface = {
   ERROR500: '500',
   OTHER: 'OTHER'
 }
-let statusCodeList  = Object.keys(statusCodeMap).map(key => statusCodeMap[key])
+let statusCodeList = Object.keys(statusCodeMap).map(key => statusCodeMap[key])
 
 export function lookupByChannel(
   channel: ChannelInterface = channels.DEFAULT
