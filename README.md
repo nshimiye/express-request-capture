@@ -7,7 +7,7 @@ Node.js express middleware for capturing HTTP requests and responses
 [![Travis](https://img.shields.io/travis/nshimiye/express-request-capture.svg)](https://travis-ci.org/nshimiye/express-request-capture)
 [![codecov](https://codecov.io/gh/nshimiye/express-request-capture/branch/master/graph/badge.svg)](https://codecov.io/gh/nshimiye/express-request-capture)
 [![Dev Dependencies](https://david-dm.org/nshimiye/express-request-capture/dev-status.svg)](https://david-dm.org/nshimiye/express-request-capture?type=dev)
-[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/nshimiye)
+[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/nshimiyetech)
 
 
 ### Usage
