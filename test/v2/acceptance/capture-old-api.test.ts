@@ -1,7 +1,7 @@
 import Express from 'express'
 let requestTest = require('supertest')
 
-import capture from '../../../src/v2'
+import capture, { IPrintAdapter } from '../../../src/v2'
 
 describe('Test capture function', () => {
   let routeGetHandler

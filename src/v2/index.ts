@@ -7,17 +7,17 @@
  */
 import { Express, Request, Response } from 'express'
 
-import { capture, ERCIRequest, ERCIResponse } from './capture' // captureRequestData
+import { capture as captureWorker, ERCIRequest, ERCIResponse } from './capture' // captureRequestData
 import printer from './printer'
 // var printAdapter = { channel: 'console|http|mongo|mysql', url: 'required if channel is either http or database' }
 export interface IPrintAdapter {
   channel: string
   url?: string // not needed for console channel
 }
-export function captureManager(printAdapter: IPrintAdapter) {
+export default function capture(printAdapter: IPrintAdapter) {
   return function(req: ERCIRequest, res: ERCIResponse, next: () => any) {
     return (
-      capture(req, res, next) // capture calls next!
+      captureWorker(req, res, next) // capture calls next!
         .then((data: any) =>
           printer.print(data, printAdapter.channel, printAdapter)
         )
@@ -28,5 +28,3 @@ export function captureManager(printAdapter: IPrintAdapter) {
     )
   }
 }
-
-export default captureManager
