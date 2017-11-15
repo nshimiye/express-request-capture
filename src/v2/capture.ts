@@ -68,8 +68,11 @@ export function parseRequestBody(
       )
       break
     default:
+      console.log('----', req.headers['content-type'], '----')
       bodyParser = new Promise(r =>
-        anyBody(req, res, {}, (err: Error, body: any) => r(err || body))
+        anyBody(req, res, {}, (err: Error, body: any) =>
+          r(err ? { contentType: 'NOT_FOUND' } : body)
+        )
       )
       break
   }
