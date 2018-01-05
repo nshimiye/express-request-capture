@@ -8,12 +8,9 @@
 import { Express, Request, Response } from 'express'
 
 import { capture as captureWorker, ERCIRequest, ERCIResponse } from './capture' // captureRequestData
-import printer from './printer'
+import printer, { IPrintAdapter } from './printer'
 // var printAdapter = { channel: 'console|http|mongo|mysql', url: 'required if channel is either http or database' }
-export interface IPrintAdapter {
-  channel: string
-  url?: string // not needed for console channel
-}
+
 export default function capture(printAdapter: IPrintAdapter) {
   return function(req: ERCIRequest, res: ERCIResponse, next: () => any) {
     return (

@@ -25,7 +25,11 @@ var requestCapture = require ('express-request-capture'),
 
 var app = express()
 
-var printAdapter = { channel: 'console|http', url: 'required if channel is either http' };
+var printAdapter = { 
+    channel: 'console|http',
+    url: 'required if channel is either http',
+    headers: { 'apiKey': 'my-base64-api-key' },
+};
 app.use(requestCapture(printAdapter))
 ```
 
