@@ -110,7 +110,7 @@
     "sinon": "^5.0.0",
     "superagent": "^3.8.0",
     "supertest": "^3.0.0",
-    "ts-jest": "^22.0.1",
+    "ts-jest": "^25.1.0",
     "ts-node": "^5.0.0",
     "tslint": "^5.4.3",
     "tslint-config-prettier": "^1.1.0",
